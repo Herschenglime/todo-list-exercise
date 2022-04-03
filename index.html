@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="sytles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar__container">
+            <button id="settings"> ⚙️ </button>
+        </div>
+    </nav>
+ 
+    <header>
+        <h1>Tasks</h1>
+        <form id="new-task-form">
+            <input
+                type="text"
+                id="new-task-input"
+                placeholder="Type a task here" />
+            <input
+                type="submit"
+                id="new-task-submit"
+                value="Add task" />
+        </form>
+    </header>
+ 
+    <main>
+        <section class="task-list">
+            <h2>Tasks</h2>
+            
+            <div class="overall">
+                <button id="delete_all">Delete All</button>
+                <button id="print_all">Print All</button>
+            
+            </div>
+
+            
+            <div id="tasks">
+ 
+                <!-- <div class="task">
+                    <div class="content">
+                        <input
+                            type="text"
+                            class="text"
+                            value="dummy task"
+                            readonly
+                        />
+                    </div>
+                    <div class="actions">
+                        <button class="edit">Edit</button>
+                        <button class="delete">Delete</button>
+                    </div>
+                </div> -->
+               
+            </div>
+        </section>
+    </main>
+ 
+    <script src="app.js"></script>
+</body>
+</html>
+

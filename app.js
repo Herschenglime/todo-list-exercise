@@ -192,5 +192,20 @@ window.addEventListener('load', () => {
             console.log("No tasks in local storage.")
         }
     });
+
 });
 
+// temp settings popup functionality
+function toggleSettings() {
+    document.getElementById("settings_popup").classList.toggle("active");
+}
+
+document.addEventListener('keydown', function(event){
+	if(event.key === "Escape"){
+        document.getElementById("settings_popup").classList.toggle("active");
+	}
+});
+
+function toggleDuplicates () {
+    console.log("user wants to toggle duplicates!")
+}

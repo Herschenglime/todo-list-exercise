@@ -189,7 +189,7 @@ input, button {
     border-radius: .8rem;
     margin-bottom: 1rem;
     cursor: pointer;
-    display: none;
+    opacity: ;
 }
 
 .overall #print_all:hover {
@@ -208,7 +208,6 @@ input, button {
     margin-bottom: 1rem;
     margin-left: .5rem;
     cursor: pointer;
-    display: none;
 }
 
 .overall #drawTasks_button:hover {

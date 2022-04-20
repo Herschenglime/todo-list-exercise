@@ -1,3 +1,10 @@
+//window.localStorage
+// localStorage.setItem('testObject', 'testValue');
+// const testConst = localStorage.getItem('testObject');
+// localStorage.removeItem('testObject');
+// console.log(Storage.toString());
+
+// add option to allow for duplicate tasks or not (add id for each task and use that to refer to instad of name)
 var allowDuplicates = true;
 
 window.addEventListener('load', () => {
@@ -7,6 +14,7 @@ window.addEventListener('load', () => {
     const print_all = document.querySelector("#print_all");
     const draw_tasks = document.querySelector("#drawTasks_button");
     
+    // let taskNames = [];
     let tasks = [];    
 
     function drawTasks() {
@@ -16,7 +24,6 @@ window.addEventListener('load', () => {
             tasks = [];
             JSON.parse(localStorage.tasks).forEach((task) => {
                 tasks.push(task);
-            }) 
         } catch (e) {
             console.log("caught error likely due to localStorage.tasks being empty. Is this an issue?")
             // HERE IS HOW TO TELL IF THERE ARE NO TASKS
@@ -56,6 +63,7 @@ window.addEventListener('load', () => {
                 task_input_el.value = task.taskName;
                 task_input_el.setAttribute("readonly", "readonly");
             
+
                 task_content_el.appendChild(task_input_el);
         
                 // creates buttons (required to display)

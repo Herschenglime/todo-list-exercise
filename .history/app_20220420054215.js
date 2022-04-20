@@ -17,7 +17,7 @@ window.addEventListener('load', () => {
             JSON.parse(localStorage.tasks).forEach((task) => {
                 tasks.push(task);
             }) 
-        } catch (e) {
+        }catch (e) {
             console.log("caught error likely due to localStorage.tasks being empty. Is this an issue?")
             // HERE IS HOW TO TELL IF THERE ARE NO TASKS
         }

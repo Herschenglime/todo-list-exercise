@@ -208,7 +208,7 @@ input, button {
     margin-bottom: 1rem;
     margin-left: .5rem;
     cursor: pointer;
-    display: none;
+    /* display: none; */
 }
 
 .overall #drawTasks_button:hover {

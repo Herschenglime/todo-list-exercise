@@ -69,9 +69,9 @@ input, button {
     font-weight: 700;
     background-image: linear-gradient(to right, var(--green), var(--purple));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     cursor: pointer;
-    /* transition: 0.4s; */
 }
 
 #new-task-submit:hover {
@@ -163,9 +163,6 @@ input, button {
 
 
 .overall #delete_all {
-    /* display: flex;
-    flex-direction: column;
-    flex: 1 1 0%; */
     color: var(--red);
     background-color: var(--gray);
     padding: .3rem;
@@ -256,7 +253,6 @@ main {
     font-size: 1.125rem;
     width: 100%;
     display: block;
-    /* transition: 0.4s; */
 }
 
 #tasks .task .content .text:not(:read-only) {
@@ -274,7 +270,6 @@ main {
     font-size: 1.125rem;
     font-weight: 700;
     text-transform: uppercase;
-    /* transition: 0.4s */
 }
 
 .task .actions button:hover {

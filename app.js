@@ -7,11 +7,13 @@ window.addEventListener('load', () => {
     const print_all = document.querySelector("#print_all");
     const draw_tasks = document.querySelector("#drawTasks_button");
     
+    // array that stores all tasks in easily-accessible format, but that doesn't save upon page refresh
     let tasks = [];    
 
+    // Each task has its own HTML element, this function handles creating each element with a forEach() loop. Function also refreshes all displayed tasks when called (refreshes task list)
     function drawTasks() {
         
-        // refresh task list based on local storage
+        // refresh task array based on local storage
         try {
             tasks = [];
             JSON.parse(localStorage.tasks).forEach((task) => {
@@ -32,9 +34,8 @@ window.addEventListener('load', () => {
             console.log(e)
         }
         
-        // draw tasks
+        // draw each task
         try {
-            console.log(tasks)
             tasks.forEach((task) => {
                 const list_el = document.querySelector("#tasks");
                 
@@ -67,12 +68,12 @@ window.addEventListener('load', () => {
                 task_edit_el.innerHTML = "Edit";
         
                 const task_edit_icon = document.createElement("i");
+                // creates the icon (this code is found at fontawesome.com)
                 task_edit_icon.innerHTML = '<i class="fa-solid fa-pencil"></i>';
 
                 const task_delete_icon = document.createElement("i");
-                task_delete_icon.innerHTML = '<i class="fa-solid fa-trash" onclick="deleteTask()"></i>';
+                task_delete_icon.innerHTML = '<i class="fa-solid fa-trash""></i>';
                 
-        
                 task_actions_el.appendChild(task_edit_icon);
                 task_actions_el.appendChild(task_delete_icon);
         
@@ -122,6 +123,7 @@ window.addEventListener('load', () => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         
+        // prevent duplicates (if enabled)
         var tempDupToggle;
         tasks.forEach((task) => {
             if (task.taskName == input.value && !allowDuplicates) {
@@ -132,6 +134,7 @@ window.addEventListener('load', () => {
             }
         })
         
+        // prevent blank tasks
         if (!input.value) {
             if (tempDupToggle) {
                 tempDupToggle = !tempDupToggle;
@@ -141,6 +144,7 @@ window.addEventListener('load', () => {
             return;
         }
 
+        // create task object
         const taskObj = {
             taskName:input.value, 
             status:"TEMP", 
@@ -148,19 +152,16 @@ window.addEventListener('load', () => {
             priority: "TEMP"
         }
 
-       
+       // append individual task to tasks array, then update localStorage to match
         tasks.push(taskObj);
-        console.log("tasks array:")
-        console.log(tasks)
-        console.log("=====")
         localStorage.setItem("tasks", JSON.stringify(tasks));
         
+        // clear input field
         input.value = "";
 
-        // refresh tasks by calling drawTask function
+        // refresh tasks by calling drawTask function so that new task is displayed
         drawTasks();
 
-     
     });
     
     // delete_all functionality
@@ -170,6 +171,7 @@ window.addEventListener('load', () => {
         drawTasks();
     });
     
+    // print all functionality
     print_all.addEventListener('click', () => {
         try {
             console.log("session tasks array:")
@@ -194,6 +196,7 @@ function toggleSettings() {
     document.getElementById("settings_popup").classList.toggle("active");
 }
 
+// allow user to use escape to toggle settings (note that this should be updated as it's currently constantly checking for escape, it should only check when the settings is opened)
 document.addEventListener('keydown', function(event){
 	if(event.key === "Escape"){
         document.getElementById("settings_popup").classList.toggle("active");
@@ -206,11 +209,7 @@ function toggleDuplicates() {
     console.log(allowDuplicates)
 }
 
-function deleteTask() {
-    console.log("icon clicked")
-    return this.id
-}
-
+// my saving-grace function that I somehow was able to figure out at 3:30 AM
 function getIndexById(Id) {
     var tempLocalStorage = JSON.parse(localStorage.getItem("tasks"))
     var target;
@@ -225,12 +224,8 @@ function getIndexById(Id) {
 }
 
 
-
-
-// testing gpt-j fetch request
-let returnedText = "";
+// gpt-j fetch request for joke button
 function testAPI() {
-    console.log("this should hold response:")
     fetch("https://api.ai21.com/studio/v1/j1-jumbo/complete", {
       headers: {
         "Authorization": "Bearer X9U5ZKe7tI7oe5ni0zPLyIUo3w19xJCS",
@@ -271,12 +266,6 @@ function testAPI() {
         }),
       method: "POST"
     }).then(response => response.json()).then(data => {
-        returnedText = data;
-        printResponse();
+        alert(data.completions[0].data.text)
     });
-}
-
-function printResponse() {
-    console.log(returnedText)
-    alert(returnedText.completions[0].data.text)
 }

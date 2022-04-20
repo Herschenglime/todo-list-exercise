@@ -4,7 +4,6 @@
 // localStorage.removeItem('testObject');
 // console.log(Storage.toString());
 
-
 // add option to allow for duplicate tasks or not (add id for each task and use that to refer to instad of name)
 
 window.addEventListener('load', () => {
@@ -13,10 +12,9 @@ window.addEventListener('load', () => {
     const delete_all = document.querySelector("#delete_all");
     const print_all = document.querySelector("#print_all");
     const draw_tasks = document.querySelector("#drawTasks_button");
-    let taskNames = [];
+    // let taskNames = [];
     let tasks = [];    
 
-    
     function drawTasks() {
        // old version of drawTasks (worked)
         // // refresh task list based on local storage
@@ -116,25 +114,24 @@ window.addEventListener('load', () => {
         
         // refresh task list based on local storage
         try {
-            //tasks = JSON.parse(localStorage.tasks);
-            taskNames = JSON.parse(localStorage.tasks).map(a => a.taskName)
             tasks = [];
-            localStorage.tasks.forEach((task) => {
+            JSON.parse(localStorage.tasks).forEach((task) => {
+                console.log("test")
                 tasks.push(task);
             });
-            console.log("session tasks array:")
-            console.log(tasks)
-            console.log("local storage tasks")
-            console.log(localStorage.tasks)
-            //console.log(testTasks);
+            // console.log("session tasks array:")
+            // console.log(tasks)
+            // console.log("local storage tasks")
+            // console.log(localStorage.tasks)
+            // //console.log(testTasks);
         } catch (e) {
-            taskNames = [];
+            console.log("caught error likely due to localStorage.tasks being empty. Is this an issue?")
+            // HERE IS HOW TO TELL IF THERE ARE NO TASKS
         }
         
-        // delete all drawn tasks
+        // delete all drawn tasks (prevents dupplication of drawn tasks)
         try {
-            const tempTasks = document.querySelectorAll('.task');
-            tempTasks.forEach((drawnTask) => {
+            document.querySelectorAll('.task').forEach((drawnTask) => {
                 drawnTask.remove();
             })
         } catch (e) {
@@ -155,16 +152,29 @@ window.addEventListener('load', () => {
                 const task_content_el = document.createElement("div");
                 task_content_el.classList.add("content");
         
+
                 task_el.appendChild(task_content_el);
-        
+                
+                
                 const task_input_el = document.createElement("input");
                 task_input_el.classList.add("text");
                 task_input_el.type = "text";
+                
+                // id code
+                const task_id_el = document.createElement("input");
+                task_id_el.classList.add("text");
+                
                 // determines the displayed text
                 task_input_el.value = task.taskName;
+                task_id_el.value = task.id;
                 task_input_el.setAttribute("readonly", "readonly");
-        
+                task_id_el.setAttribute("readonly", "readonly");
+                task_id_el.setAttribute("style", "display:none");
+                
+                // new code (temp comment)
+
                 task_content_el.appendChild(task_input_el);
+                task_content_el.appendChild(task_id_el);
         
                 // creates buttons (required to display)
                 const task_actions_el = document.createElement("div");
@@ -177,6 +187,7 @@ window.addEventListener('load', () => {
                 const task_delete_el = document.createElement("button");
                 task_delete_el.classList.add("delete");
                 task_delete_el.innerHTML = "Delete";
+
         
                 task_actions_el.appendChild(task_edit_el);
                 task_actions_el.appendChild(task_delete_el);
@@ -187,9 +198,8 @@ window.addEventListener('load', () => {
 
                 // edit button functionality
                 task_edit_el.addEventListener('click', () => {
-                    console.log("edit clicked")
-                    console.log("selected task:")
-                    console.log(task_el)
+                    // console.log("selected task:")
+                    // console.log(task_el)
                     if (task_edit_el.innerText.toLowerCase() == "edit") {
                         task_input_el.removeAttribute("readonly");
                         // need to look into .focus
@@ -203,10 +213,22 @@ window.addEventListener('load', () => {
 
                 // delete button functionality
                 task_delete_el.addEventListener('click', () => {
-                        console.log("here")
-                        console.log(task_el)
-                        taskNames.remove(task)
-                        list_el.removeChild(task_el);
+                        // console.log("here")
+                        // console.log(task_el)
+                        // console.log(task.id)
+                        // remove task from tasks array, may need a better solution as project scales (memory management, this still creates a new array)
+                        tasks = tasks.filter(function(el) { return el.id != task.id; });
+                        tasks.forEach((currentTask) => {
+                            console.log(currentTask.id)
+                            console.log(task.id)
+                            if (currentTask.id == task.id) {
+                                console.log("Found it")
+                            } {
+                                console.log("nope")
+                            }
+                            console.log("====")
+                        })
+                        // list_el.removeChild(task_el);
                     });
             })
     
@@ -219,13 +241,12 @@ window.addEventListener('load', () => {
     // drawTasks when page is first loaded
     drawTasks();
 
-
     // adding tasks
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const task = input.value;
-        // this is a temporary task, objects need to be instanced and exist in the global scope (and saved in the local storage)
+        // const task = input.value;
+        // task object is created here
         const taskObj = {
             taskName:input.value, 
             status:"TEMP", 
@@ -233,7 +254,7 @@ window.addEventListener('load', () => {
             priority: "TEMP"
         }
         // alert if no task entered when submitted
-        if (!task) {
+        if (!input.value) {
             alert("no text entered");
             return;
         }
@@ -241,8 +262,6 @@ window.addEventListener('load', () => {
         tasks.push(taskObj);
         console.log("tasks array:")
         console.log(tasks)
-        console.log("taskNames array")
-        console.log(taskNames)
         console.log("=====")
         localStorage.setItem("tasks", JSON.stringify(tasks));
         // Storage.setItem("tasks", )
@@ -303,6 +322,7 @@ window.addEventListener('load', () => {
         }
     });
 
+    // drawTasks dev button functionality
     draw_tasks.addEventListener('click', () => {
         drawTasks();
     });
@@ -323,7 +343,6 @@ document.addEventListener('keydown', function(event){
 function toggleDuplicates() {
     console.log("user wants to toggle duplicates!")
 }
-
 
 // testing gpt-j fetch request
 let returnedText = "";

@@ -294,7 +294,6 @@ main {
     margin-right: 1rem;
     cursor: pointer;
 }
-
 .fa-face-surprise:hover {
     opacity: 0.5;
     color: var(--light);

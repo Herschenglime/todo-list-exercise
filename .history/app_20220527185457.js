@@ -1,17 +1,16 @@
 /*
 Tasks:
 
-* understand this code
-
 * fix the joke button (very easy)
 
-* add emoji button (more difficult)
+* add emoji button 
     * this button should be added on the left of the edit button for each task
-    * clicking this button will add a random emoji to the end of the task
-    * you don't need to touch html file and css is just for styling, so focus on js
-    * good luck!
+    * clicking this button will 
 
 */
+
+
+
 
 
 var allowDuplicates = true;

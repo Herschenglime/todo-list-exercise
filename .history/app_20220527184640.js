@@ -1,19 +1,3 @@
-/*
-Tasks:
-
-* understand this code
-
-* fix the joke button (very easy)
-
-* add emoji button (more difficult)
-    * this button should be added on the left of the edit button for each task
-    * clicking this button will add a random emoji to the end of the task
-    * you don't need to touch html file and css is just for styling, so focus on js
-    * good luck!
-
-*/
-
-
 var allowDuplicates = true;
 
 window.addEventListener('load', () => {
@@ -90,6 +74,7 @@ window.addEventListener('load', () => {
                 const task_delete_icon = document.createElement("i");
                 task_delete_icon.innerHTML = '<i class="fa-solid fa-trash""></i>';
                 
+                task_actions_el.appendChild(task_emoji_icon);
                 task_actions_el.appendChild(task_edit_icon);
                 task_actions_el.appendChild(task_delete_icon);
                 

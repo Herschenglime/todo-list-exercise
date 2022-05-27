@@ -295,6 +295,13 @@ main {
     cursor: pointer;
 }
 
+.fa-pencil {
+    color: var(--dark);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+    
 .fa-face-surprise:hover {
     opacity: 0.5;
     color: var(--light);
@@ -303,14 +310,6 @@ main {
 .fa-face-surprise:active {
     opacity: 0.67;
 }
-
-.fa-pencil {
-    color: var(--dark);
-    margin-left: 1rem;
-    margin-right: 1rem;
-    cursor: pointer;
-}
-    
 
 .fa-pencil:hover {
     opacity: 0.5;

@@ -288,30 +288,20 @@ main {
     color: var(--red);
 }
 
-.fa-face-surprise {
-    color: var(--dark);
-    margin-left: 1rem;
-    margin-right: 1rem;
-    cursor: pointer;
-}
-
-.fa-face-surprise:hover {
-    opacity: 0.5;
-    color: var(--light);
-}
-
-.fa-face-surprise:active {
-    opacity: 0.67;
-}
-
 .fa-pencil {
     color: var(--dark);
     margin-left: 1rem;
     margin-right: 1rem;
     cursor: pointer;
 }
-    
 
+.fa-face- {
+    color: var(--dark);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+    
 .fa-pencil:hover {
     opacity: 0.5;
     color: var(--light);

@@ -304,6 +304,23 @@ main {
     opacity: 0.67;
 }
 
+.fa-face-laugh {
+    color: var(--dark);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+
+.fa-face-laugh:hover {
+    opacity: 0.8;
+    color: var(--yellow);
+}
+
+.fa-face-laugh:active {
+    opacity: 0.67;
+}
+
 .fa-pencil {
     color: var(--dark);
     margin-left: 1rem;

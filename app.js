@@ -119,7 +119,7 @@ window.addEventListener('load', () => {
 
                 // delete button functionality
                 task_delete_icon.addEventListener('click', () => {
-                        var tempLocalStorageDelete = JSON.parse(localStorage.getItem("tasks"));
+                        var tempLocalStorageDelete = JSON.parse(localStorage.getItem("tasks")); //TODO: inquire about scoping of this var
                         
                         tempLocalStorageDelete.splice(getIndexById(task_el.id), 1);
 
@@ -143,6 +143,7 @@ window.addEventListener('load', () => {
         e.preventDefault();
         
         // prevent duplicates (if enabled)
+        // TODO: Make it delete already duplicated entries
         var tempDupToggle;
         tasks.forEach((task) => {
             if (task.taskName == input.value && !allowDuplicates) {
@@ -164,16 +165,17 @@ window.addEventListener('load', () => {
         }
 
         // create task object
+        // no such thing as a prototype/constructor in javascript?
         const taskObj = {
             taskName:input.value, 
             status:"TEMP", 
-            id: Math.floor(Date.now() + Math.random()),
+            id: Math.floor(Date.now() + Math.random()), //why? isn't there the possibility of not having a uid with this?
             priority: "TEMP"
         }
 
        // append individual task to tasks array, then update localStorage to match
         tasks.push(taskObj);
-        localStorage.setItem("tasks", JSON.stringify(tasks));
+        localStorage.setItem("tasks", JSON.stringify(tasks)); //potentially wasteful, but idk how else to do it
         
         // clear input field
         input.value = "";
@@ -286,5 +288,6 @@ function testAPI() {
       method: "POST"
     }).then(response => response.json()).then(data => {
         alert(data.completions[0].data.text)
+        console.log("funny acquired😎");
     });
 }

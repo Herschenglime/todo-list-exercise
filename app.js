@@ -10,6 +10,8 @@ Tasks:
     * clicking this button will add a random emoji to the end of the task
     * you don't need to touch html file and css is just for styling, so focus on js
     * good luck!
+    *
+    * Could make a toggle if wanted for above and beyond
 
 */
 
@@ -26,7 +28,8 @@ window.addEventListener('load', () => {
     // array that stores all tasks in easily-accessible format, but that doesn't save upon page refresh
     let tasks = [];    
 
-    // Each task has its own HTML element, this function handles creating each element with a forEach() loop. Function also refreshes all displayed tasks when called (refreshes task list)
+    // Each task has its own HTML element, this function handles creating each element with a forEach() loop.
+    // Function also refreshes all displayed tasks when called (refreshes task list)
     function drawTasks() {
         
         // refresh task array based on local storage
@@ -40,7 +43,7 @@ window.addEventListener('load', () => {
             // HERE IS HOW TO TELL IF THERE ARE NO TASKS
         }
         
-        // delete all drawn tasks (prevents dupplication of drawn tasks)
+        // delete all drawn tasks (prevents duplication of drawn tasks)
         try {
             document.querySelectorAll('.task').forEach((drawnTask) => {
                 drawnTask.remove();

@@ -106,7 +106,18 @@ window.addEventListener('load', () => {
 
                 // emoji button functionality
                 task_emoji_icon.addEventListener('click', () => {
-                    tasks[getIndexById(task_el.id)].taskName += randomEmoji();
+                    let taskName =  tasks[getIndexById(task_el.id)].taskName;
+
+                    //emoji detection: https://stackoverflow.com/questions/18862256/how-to-detect-emoji-using-javascript
+                    // only toggles emoji at end of task, leaving others intact
+                    if (/\.*\p{Extended_Pictographic}$/u.test(taskName)) {
+                        tasks[getIndexById(task_el.id)].taskName = taskName.replace(/\p{Extended_Pictographic}$/gu, "") //cuts off emoji if there
+                    }
+                    else {
+                        tasks[getIndexById(task_el.id)].taskName += randomEmoji() //otherwise adds emoji
+                    }
+
+
                     localStorage.setItem("tasks", JSON.stringify(tasks));
 
                     drawTasks();
